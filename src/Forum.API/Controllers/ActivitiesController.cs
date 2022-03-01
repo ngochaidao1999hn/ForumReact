@@ -22,6 +22,7 @@ namespace Forum.API.Controllers
         }
         #endregion
         #region methods
+
         [HttpGet]
         public async Task<IActionResult> GetAll() {
             return Ok(await _mediator.Send(new getListActivities()));
