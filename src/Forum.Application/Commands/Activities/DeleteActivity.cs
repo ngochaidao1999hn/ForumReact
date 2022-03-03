@@ -1,4 +1,5 @@
-﻿using Forum.Domain.Entities;
+﻿using Forum.Application.Models;
+using Forum.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.Commands.Activities
 {
-    public class DeleteActivity:IRequest
+    public class DeleteActivity:IRequest<Result<Guid>>
     {
         public Guid Id;
         #region ctor

@@ -1,0 +1,14 @@
+.list_activity {
+  width: 800px;
+  margin: 77px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: start;
+  padding: 20px 20px;
+  border: 1px solid black;
+}
+.activity {
+  width: 25%;
+  border: 1px solid black;
+}

@@ -1,4 +1,5 @@
-﻿using Forum.Domain.Entities;
+﻿using Forum.Application.Models;
+using Forum.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.Queries.Activities
 {
-    public class getListActivities:IRequest<List<Activity>>
+    public class getListActivities:IRequest<Result<List<Activity>>>
     {
     }
 }

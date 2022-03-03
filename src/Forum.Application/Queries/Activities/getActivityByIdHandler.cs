@@ -1,4 +1,5 @@
-﻿using Forum.Domain;
+﻿using Forum.Application.Models;
+using Forum.Domain;
 using Forum.Domain.Entities;
 using MediatR;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.Queries.Activities
 {
-    public class getActivityByIdHandler : IRequestHandler<getActivityById, Activity>
+    public class getActivityByIdHandler : IRequestHandler<getActivityById, Result<Activity>>
     {
         private readonly IUnitOfWork _unitofwork;
         #region ctor
@@ -19,9 +20,11 @@ namespace Forum.Application.Queries.Activities
             _unitofwork = unitofwork;
         }
         #endregion
-        public async Task<Activity> Handle(getActivityById request, CancellationToken cancellationToken)
+        public async Task<Result<Activity>> Handle(getActivityById request, CancellationToken cancellationToken)
         {
-            return await _unitofwork.ActivityRepository.GetById(request.Id);
+            Result<Activity> result = new Result<Activity>();
+            result.CreateSuccessResult(await _unitofwork.ActivityRepository.GetById(request.Id));
+            return result;
         }
     }
 }

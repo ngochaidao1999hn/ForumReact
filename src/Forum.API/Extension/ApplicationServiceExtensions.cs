@@ -18,6 +18,13 @@ namespace Forum.API.Extension
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services,IConfiguration config) {
             services.AddDbContext<ForumDbContext>(option => option.UseSqlServer(config.GetConnectionString("Forum_Db")));
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy =>
+                {
+                    policy.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+                });
+            });
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddSwaggerGen(c =>
             {

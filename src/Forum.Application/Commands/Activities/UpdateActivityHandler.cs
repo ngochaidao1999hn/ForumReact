@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Forum.Application.Models;
 using Forum.Domain;
+using Forum.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Forum.Application.Commands.Activities
 {
-    public class UpdateActivityHandler : IRequestHandler<UpdateActivity>
+    public class UpdateActivityHandler : IRequestHandler<UpdateActivity,Result<Activity>>
     {
         private IUnitOfWork _unitofwork;
         private IMapper _mapper;
@@ -21,13 +23,25 @@ namespace Forum.Application.Commands.Activities
             _mapper = mapper;
         }
         #endregion
-        public async Task<Unit> Handle(UpdateActivity request, CancellationToken cancellationToken)
+        public async Task<Result<Activity>> Handle(UpdateActivity request, CancellationToken cancellationToken)
         {
-            var activity = await _unitofwork.ActivityRepository.GetById(request.activity.Id);
-            _mapper.Map(request.activity, activity);
-            _unitofwork.ActivityRepository.Update(activity);
-            await _unitofwork.SaveChange();
-            return Unit.Value;
+            Result<Activity> result = new Result<Activity>();
+            List<string> messages = new List<string>();
+            try {
+                var activity = await _unitofwork.ActivityRepository.GetById(request.activity.Id);
+                _mapper.Map(request.activity, activity);
+                _unitofwork.ActivityRepository.Update(activity);
+                await _unitofwork.SaveChange();
+                result.CreateSuccessResult(request.activity);
+                messages.Add("Update Activity Successful");
+                result.Messages = messages;
+
+            } catch (Exception e) {
+                messages.Add(e.InnerException.ToString());
+                result.CreateFailureResult(messages);
+            }
+
+            return result;
         }
     }
 }
