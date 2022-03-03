@@ -14,7 +14,7 @@ namespace Forum.Domain.Repositories.Base
         Task<List<T>> Get(Expression<Func<T, bool>> filter = null,Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "");
         Task<T> GetById(Guid Id);
         void Add(T entity);
-        Task Delete(T entity);
+        void Delete(T entity);
         void Update(T entity);
     }
 }

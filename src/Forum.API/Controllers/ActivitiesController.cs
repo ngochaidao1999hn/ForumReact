@@ -39,6 +39,10 @@ namespace Forum.API.Controllers
         public async Task<IActionResult> Update([FromBody] Activity activity) {
             return Ok(await _mediator.Send(new UpdateActivity(activity)));
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid Id) {
+            return Ok(await _mediator.Send(new DeleteActivity(Id)));
+        }
         #endregion
     }
 }

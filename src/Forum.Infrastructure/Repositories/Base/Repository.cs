@@ -14,19 +14,22 @@ namespace Forum.Infrastructure.Repositories.Base
     {
         private readonly ForumDbContext _context;
         private  DbSet<T> dbSet;
+        #region ctor
         public Repository(ForumDbContext context)
         {
             _context = context;
             this.dbSet = context.Set<T>();
         }
+        #endregion
+        #region methods
         public void Add(T entity)
         {
             dbSet.Add(entity);
         }
 
-        public Task Delete(T entity)
+        public void Delete(T entity)
         {
-            throw new NotImplementedException();
+             dbSet.Remove(entity);
         }
 
         public async Task<List<T>> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
@@ -68,5 +71,6 @@ namespace Forum.Infrastructure.Repositories.Base
         {
             dbSet.Update(entity);
         }
+        #endregion
     }
 }

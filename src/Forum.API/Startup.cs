@@ -1,3 +1,4 @@
+using Forum.API.Extension;
 using Forum.Application.Mapper;
 using Forum.Application.Queries.Activities;
 using Forum.Domain;
@@ -34,14 +35,7 @@ namespace Forum.API
         {
 
             services.AddControllers();
-            services.AddDbContext<ForumDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Forum_Db")));
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Forum.API", Version = "v1" });
-            });
-            services.AddMediatR(typeof(getListActivitiesHandler).Assembly);
-            services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+            services.AddApplicationServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
