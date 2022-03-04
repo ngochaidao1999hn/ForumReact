@@ -1,4 +1,5 @@
-﻿using Forum.Application.Models;
+﻿using Forum.Application.DTOs.Activity;
+using Forum.Application.Models;
 using Forum.Domain.Entities;
 using MediatR;
 using System;
@@ -11,9 +12,9 @@ namespace Forum.Application.Commands.Activities
 {
     public class UpdateActivity :IRequest<Result<Activity>>
     {
-        public Activity activity;
+        public ActivityDTO activity;
         #region ctor
-        public UpdateActivity(Activity activity)
+        public UpdateActivity(ActivityDTO activity)
         {
             this.activity = activity;
         }

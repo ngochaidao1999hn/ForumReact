@@ -30,9 +30,10 @@ namespace Forum.Application.Commands.Activities
             try {
                 var activity = await _unitofwork.ActivityRepository.GetById(request.activity.Id);
                 _mapper.Map(request.activity, activity);
+                activity.ModifiedOn = DateTime.Now;
                 _unitofwork.ActivityRepository.Update(activity);
                 await _unitofwork.SaveChange();
-                result.CreateSuccessResult(request.activity);
+                result.CreateSuccessResult(activity);
                 messages.Add("Update Activity Successful");
                 result.Messages = messages;
 

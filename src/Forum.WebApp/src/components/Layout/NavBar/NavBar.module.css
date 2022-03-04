@@ -15,8 +15,8 @@
 }
 .navbar img {
   height: 50px;
-  width: auto;
-  margin-left: 20px;
+  width: 50px;
+  margin-left: 50px;
 }
 .pages {
   display: flex;
@@ -27,10 +27,11 @@
 }
 
 .pages a {
-  padding: 12px 24px;
-  border-radius: 5px;
+  padding: 24px 32px;
 }
 .pages a:hover {
-  background-color: greenyellow;
+  background-color: white;
+  opacity: 0.5;
   color: black;
+  cursor: pointer;
 }

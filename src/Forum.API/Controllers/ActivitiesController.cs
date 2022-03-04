@@ -1,4 +1,5 @@
 ﻿using Forum.Application.Commands.Activities;
+using Forum.Application.DTOs.Activity;
 using Forum.Application.Queries.Activities;
 using Forum.Domain.Entities;
 using MediatR;
@@ -36,7 +37,7 @@ namespace Forum.API.Controllers
             return Ok(await _mediator.Send(new CreateActivity(activity)));
         }
         [HttpPut]
-        public async Task<IActionResult> Update([FromBody] Activity activity) {
+        public async Task<IActionResult> Update([FromBody] ActivityDTO activity) {
             return Ok(await _mediator.Send(new UpdateActivity(activity)));
         }
         [HttpDelete]

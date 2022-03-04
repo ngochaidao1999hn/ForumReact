@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Forum.Application.DTOs.Activity;
 using Forum.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Forum.Application.Mapper
     {
         public MappingProfiles()
         {
-            CreateMap<Activity, Activity>();
+            CreateMap<ActivityDTO, Activity>();
         }
     }
 }
