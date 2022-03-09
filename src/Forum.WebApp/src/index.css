@@ -12,7 +12,9 @@ body {
   font-weight: 400;
   background-color: #ececec;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

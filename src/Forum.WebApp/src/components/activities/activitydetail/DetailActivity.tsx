@@ -3,10 +3,10 @@ import styles from "./DetailActivity.module.css";
 const DetailActivity = (props: any) => {
   const activity = props.activity;
   const closehandle = () => {
-    props.close(true);
+    props.closeForm(false);
   };
   const editHandler = () => {
-    props.edit(true);
+    props.closeForm(true);
   };
   return (
     <div className={styles.detail}>
