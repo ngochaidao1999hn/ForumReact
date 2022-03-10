@@ -4,8 +4,6 @@ using Forum.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,12 +12,16 @@ namespace Forum.Application.Commands.Activities
     public class CreateActivityHandler : IRequestHandler<CreateActivity, Result<Activity>>
     {
         private IUnitOfWork _unitofwork;
+
         #region ctor
+
         public CreateActivityHandler(IUnitOfWork unitofwork)
         {
             _unitofwork = unitofwork;
         }
-        #endregion
+
+        #endregion ctor
+
         public async Task<Result<Activity>> Handle(CreateActivity request, CancellationToken cancellationToken)
         {
             Result<Activity> result = new Result<Activity>();
@@ -30,11 +32,12 @@ namespace Forum.Application.Commands.Activities
                 await _unitofwork.SaveChange();
                 result.CreateSuccessResult(request.activity);
                 messages.Add("Create New Activity Successful");
-                result.Messages = messages;               
+                result.Messages = messages;
             }
-            catch(Exception e){
+            catch (Exception e)
+            {
                 messages.Add(e.InnerException.ToString());
-                result.CreateFailureResult(messages);             
+                result.CreateFailureResult(messages);
             }
             return result;
         }

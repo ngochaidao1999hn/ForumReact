@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Forum.Domain.Entities
 {
-    public class Activity:EntityBase
+    public class Activity : EntityBase
     {
-
         public string Title { get; set; }
         public DateTime Date { get; set; }
         public string Description { get; set; }

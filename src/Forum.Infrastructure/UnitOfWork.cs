@@ -3,9 +3,6 @@ using Forum.Domain.Entities;
 using Forum.Domain.Repositories.Base;
 using Forum.Infrastructure.Repositories.Base;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Forum.Infrastructure
@@ -14,16 +11,24 @@ namespace Forum.Infrastructure
     {
         private readonly ForumDbContext _context;
         private bool disposedValue;
+
         #region ctor
+
         public UnitOfWork(ForumDbContext context)
         {
             _context = context;
         }
-        #endregion
+
+        #endregion ctor
+
         #region repositories
+
         IRepository<Activity> IUnitOfWork.ActivityRepository => new Repository<Activity>(_context);
-        #endregion
+
+        #endregion repositories
+
         #region methods
+
         public async Task SaveChange()
         {
             await _context.SaveChangesAsync();
@@ -57,6 +62,7 @@ namespace Forum.Infrastructure
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-        #endregion
+
+        #endregion methods
     }
 }

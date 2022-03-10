@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Forum.Infrastructure.Repositories.Base
@@ -13,15 +12,20 @@ namespace Forum.Infrastructure.Repositories.Base
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
         private readonly ForumDbContext _context;
-        private  DbSet<T> dbSet;
+        private DbSet<T> dbSet;
+
         #region ctor
+
         public Repository(ForumDbContext context)
         {
             _context = context;
             this.dbSet = context.Set<T>();
         }
-        #endregion
+
+        #endregion ctor
+
         #region methods
+
         public void Add(T entity)
         {
             dbSet.Add(entity);
@@ -29,7 +33,7 @@ namespace Forum.Infrastructure.Repositories.Base
 
         public void Delete(T entity)
         {
-             dbSet.Remove(entity);
+            dbSet.Remove(entity);
         }
 
         public async Task<List<T>> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
@@ -71,6 +75,7 @@ namespace Forum.Infrastructure.Repositories.Base
         {
             dbSet.Update(entity);
         }
-        #endregion
+
+        #endregion methods
     }
 }
